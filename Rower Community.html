@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rower Community</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            color: #f6f6ff;
+            background: #070009;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: radial-gradient(circle at top left, rgba(105, 22, 181, 0.22), transparent 20%),
+                        radial-gradient(circle at bottom right, rgba(84, 0, 150, 0.18), transparent 26%),
+                        #05030b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .page {
+            position: relative;
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(10, 4, 28, 0.95);
+            border: 1px solid rgba(138, 43, 226, 0.4);
+            box-shadow: 0 0 0 4px rgba(70, 20, 125, 0.16), 0 24px 90px rgba(10, 1, 40, 0.55);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        .page::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(98, 43, 255, 0.12), transparent 32%);
+            pointer-events: none;
+        }
+        .page::after {
+            content: "";
+            position: absolute;
+            bottom: 24px;
+            right: 28px;
+            width: 90px;
+            height: 90px;
+            background: rgba(138, 43, 226, 0.16);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            filter: blur(1px);
+            pointer-events: none;
+        }
+        .hero {
+            position: relative;
+            display: grid;
+            grid-template-columns: 330px 1fr;
+            gap: 24px;
+            padding: 32px;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            width: 72px;
+            height: 72px;
+            background: rgba(138, 43, 226, 0.18);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -12px;
+            right: -12px;
+            width: 72px;
+            height: 72px;
+            background: rgba(138, 43, 226, 0.18);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            pointer-events: none;
+        }
+        .hero img.logo {
+            width: 100%;
+            border-radius: 28px;
+            object-fit: cover;
+            border: 2px solid rgba(138, 43, 226, 0.8);
+            box-shadow: 0 18px 50px rgba(80, 10, 150, 0.2), 0 0 24px rgba(138, 43, 226, 0.35);
+            background: linear-gradient(180deg, rgba(20, 6, 60, 0.9), rgba(32, 4, 75, 0.96));
+            filter: saturate(1.15) contrast(1.08);
+        }
+        .hero h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2.7rem, 4vw, 4.5rem);
+            letter-spacing: -0.05em;
+            color: #f9f7ff;
+        }
+        .hero p.lead {
+            margin: 0 0 22px;
+            line-height: 1.65;
+            color: #d8d2ff;
+            max-width: 680px;
+        }
+        .badge {
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(138, 43, 226, 0.22);
+            color: #f2efff;
+            font-weight: 700;
+            border: 1px solid rgba(138, 43, 226, 0.35);
+            margin-bottom: 18px;
+        }
+        .badge span {
+            display: inline-flex;
+            width: 12px;
+            height: 12px;
+            border-radius: 999px;
+            background: #9e5cff;
+            box-shadow: 0 0 14px rgba(158, 92, 255, 0.7);
+        }
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .actions a {
+            text-decoration: none;
+            padding: 14px 24px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            font-weight: 700;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+        .actions a.primary {
+            background: linear-gradient(135deg, #8a2be2, #4b0082);
+            color: #ffffff;
+            box-shadow: 0 0 24px rgba(138, 43, 226, 0.4);
+        }
+        .actions a.secondary {
+            background: transparent;
+            color: #c7b6ff;
+            border-color: rgba(138, 43, 226, 0.35);
+        }
+        .actions a:hover {
+            transform: translateY(-2px);
+        }
+        .content {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            padding: 20px 32px 32px;
+        }
+        .content::before {
+            content: "";
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            width: 60px;
+            height: 60px;
+            background: rgba(138, 43, 226, 0.16);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            pointer-events: none;
+        }
+        .content::after {
+            content: "";
+            position: absolute;
+            bottom: 14px;
+            left: 18px;
+            width: 60px;
+            height: 60px;
+            background: rgba(138, 43, 226, 0.16);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            pointer-events: none;
+        }
+        .card {
+            background: rgba(15, 6, 36, 0.94);
+            border: 1px solid rgba(138, 43, 226, 0.18);
+            border-radius: 20px;
+            padding: 26px;
+            min-height: 220px;
+            box-shadow: inset 0 0 32px rgba(69, 0, 130, 0.12);
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #f5f0ff;
+        }
+        .card p {
+            margin: 0.9em 0 0;
+            line-height: 1.7;
+            color: #d4ccff;
+        }
+        .image-card {
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 260px;
+            background: linear-gradient(180deg, rgba(107, 45, 255, 0.14), rgba(18, 4, 34, 0.94));
+        }
+        .image-card::before {
+            content: "";
+            position: absolute;
+            top: 16px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            background: rgba(138, 43, 226, 0.18);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            pointer-events: none;
+        }
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .footer {
+            position: relative;
+            padding: 24px 32px 32px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            width: 48px;
+            height: 48px;
+            background: rgba(138, 43, 226, 0.16);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            pointer-events: none;
+        }
+        .footer span {
+            display: block;
+            color: #d8d2ff;
+        }
+        .owner {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 18px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.95), rgba(75, 0, 130, 0.95));
+            color: #ffffff;
+            font-weight: 800;
+            box-shadow: 0 8px 24px rgba(84, 20, 175, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .owner::before {
+            content: "";
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background: rgba(255, 255, 255, 0.8);
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            flex-shrink: 0;
+        }
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <section class="hero">
+            <div>
+                <div class="badge"><span></span>42 Members Strong</div>
+                <h1>Rower Community</h1>
+                <p class="lead">A welcoming Discord community for Rower, creators, and Roblox game builders. Run by Rower and other developers, we help people, share kind support, and grow together in a positive space.</p>
+                <div class="actions">
+                    <a class="primary" href="https://discord.com/channels/1336361541225680998/1429656254778839280" target="_blank">Join Discord</a>
+                    <a class="secondary" href="contact.html">Contact the Owner</a>
+                </div>
+            </div>
+            <img class="logo" src="file:///C:/Users/Source%20Tech%20Co/Downloads/real1.webp" alt="Rower Community Logo">
+        </section>
+        <section class="content">
+            <article class="card">
+                <h2>Who We Are</h2>
+                <p>Rower Community is run by Rower and other developers who care about making a friendly, creative space. Our members are kind, supportive, and always ready to welcome new teammates.</p>
+            </article>
+            <article class="card">
+                <h2>What We Do</h2>
+                <p>We help people learn, build friendships, and explore creative projects. Our community enjoys Roblox game development, friendly discussion, and upliftment for every member.</p>
+            </article>
+            <article class="image-card">
+                <img src="file:///C:/Users/Source%20Tech%20Co/Downloads/eror.webp" alt="Roblox game development showcase">
+            </article>
+            <article class="card">
+                <h2>Community Values</h2>
+                <p>Kindness is our foundation. We celebrate respect, encouragement, and real support for those who want to grow on Roblox, in gaming, and in everyday life.</p>
+            </article>
+        </section>
+        <footer class="footer">
+            <span>Owner: <strong class="owner">Rower</strong></span>
+        </footer>
+    </main>
+</body>
+</html>
